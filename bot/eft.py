@@ -19,7 +19,7 @@ import datetime
 import maya
 import json
 import math
-
+import os
 
 class InvalidLocaleError(Exception):
     def __init__(self, locale):
@@ -29,6 +29,7 @@ class InvalidLocaleError(Exception):
 
 # utility class for interfacing with EFT's data.
 class EFT:
+
     @staticmethod
     def check_armor(lang: str, query: str) -> LogicalArmorModel:
         armor_link = (
@@ -37,7 +38,7 @@ class EFT:
         if not armor_link:
             raise InvalidLocaleError(lang)
         crafted_url = armor_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url).json()
+        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
         return LogicalArmorModel.fromJSONObj(response)
 
     @staticmethod
@@ -48,7 +49,7 @@ class EFT:
         if not astat_link:
             raise InvalidLocaleError(lang)
         crafted_url = astat_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url).json()
+        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
         return WikiAmmoModel.fromJSONObj(response)
 
     @staticmethod
@@ -59,7 +60,7 @@ class EFT:
         if not helmet_link:
             raise InvalidLocaleError(lang)
         crafted_url = helmet_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url).json()
+        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
         return LogicalHelmetModel.fromJSONObj(response)
 
     @staticmethod
@@ -72,7 +73,7 @@ class EFT:
         if not kappaquests_link:
             raise InvalidLocaleError(lang)
         crafted_url = kappaquests_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url).json()
+        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
         return KappaQuestsModel.fromJSONObj(response)
 
     @staticmethod
@@ -85,7 +86,7 @@ class EFT:
         if not kappaitem_link:
             raise InvalidLocaleError(lang)
         crafted_url = kappaitem_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url).json()
+        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
         return KappaItemsModel.fromJSONObj(response)
 
     @staticmethod
@@ -96,7 +97,7 @@ class EFT:
         if not maps_link:
             raise InvalidLocaleError(lang)
         crafted_url = maps_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url).json()
+        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
         return LogicalMapsModel.fromJSONObj(response)
 
     @staticmethod
@@ -107,7 +108,7 @@ class EFT:
         if not medical_link:
             raise InvalidLocaleError(lang)
         crafted_url = medical_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url).json()
+        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
         return MedicalModel.fromJSONObj(response)
 
     @staticmethod
@@ -118,7 +119,7 @@ class EFT:
         if not price_link:
             raise InvalidLocaleError(lang)
         crafted_url = price_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url).json()
+        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
         return TarkovMarketModel.fromJSONObj(response)
 
     @staticmethod
