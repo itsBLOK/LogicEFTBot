@@ -48,118 +48,40 @@ class KappaQuestsModel:
 
 
 @dataclass
-class LogicalArmorModel:
+class tcArmorModel:
+    name: str
     bsgID: str
-    armorName: str
-    armorZones: str
     armorClass: str
-    armorMaterial: str
-    armorDurability: str
-    armorMoveSpeed: str
-    armorTurnSpeed: str
-    armorErgo: str
-    armorEffectiveDurability: str
-    wikiLink: str
-    description: str
-
-    @classmethod
-    def fromJSONObj(cls, object: Any) -> LogicalArmorModel:
-        return LogicalArmorModel(
-            bsgID=object.get("bsgID"),
-            armorName=object.get("name"),
-            armorZones=object.get("zones"),
-            armorClass=object.get("armorclass"),
-            armorMaterial=object.get("materials"),
-            armorDurability=object.get("dura"),
-            armorMoveSpeed=object.get("moveSpeed"),
-            armorTurnSpeed=object.get("turnSpeed"),
-            armorErgo=object.get("ergo"),
-            armorEffectiveDurability=object.get("effective"),
-            wikiLink=object.get("wikiLink"),
-            description=object.get("description"),
-        )
-
-
-@dataclass
-class LogicalHelmetModel:
-    bsgID: str
-    name: str
-    armorClass: str
+    armorMats: str
     armorZones: str
-    armorDurability: str
-    armorRico: str
-    armorMoveSpeed: str
-    armorTurnSpeed: str
-    armorErgo: str
-    helmetSoundReduc: str
-    helmetBlocksHeadset: str
-    wikiLink: str
-    description: str
+    maxDurability: str
+    effectiveDurability: str
+    moveSpeedPen: str
+    turnSpeedPen: str
+    ergoPen: str
+    tcLink: str
+
 
     @classmethod
-    def fromJSONObj(cls, object: Any) -> LogicalHelmetModel:
-        return LogicalHelmetModel(
-            bsgID=object.get("bsgID"),
-            name=object.get("name"),
-            armorClass=object.get("armorClass"),
-            armorZones=object.get("armorZones"),
-            armorDurability=object.get("dura"),
-            armorRico=object.get("rico"),
-            armorMoveSpeed=object.get("moveSpeed"),
-            armorTurnSpeed=object.get("turnSpeed"),
-            armorErgo=object.get("ergo"),
-            helmetSoundReduc=object.get("soundsReduc"),
-            helmetBlocksHeadset=object.get("blocksHeadset"),
-            wikiLink=object.get("wikiLink"),
-            description=object.get("description"),
+    def fromJSONObj(cls, object: Any) -> tcArmorModel:
+        return tcArmorModel(
+            name=object.get("Name"),
+            bsgID=object.get("Item ID"),
+            armorClass=object.get("Armor Class"),
+            armorMats=object.get("Armor Material"),
+            armorZones=object.get("Protection Zones"),
+            maxDurability=object.get("Max Durability"),
+            effectiveDurability=object.get("Effective Durability"),
+            moveSpeedPen=object.get("Movement Speed Penalty"),
+            turnSpeedPen=object.get("Turn Speed Penalty"),
+            ergoPen=object.get("Ergonomics Penalty"),
+            tcLink=object.get("URL"),
         )
 
-
-@dataclass
-class LogicalMapsModel:
-    name: str
-    features: str
-    duration: str
-    players: str
-    enemies: str
-    wikiLink: str
-    shortName: str
-
-    @classmethod
-    def fromJSONObj(cls, object: Any) -> LogicalMapsModel:
-        return LogicalMapsModel(
-            name=object.get("name"),
-            features=object.get("features"),
-            duration=object.get("duration"),
-            players=object.get("players"),
-            enemies=object.get("enemies"),
-            wikiLink=object.get("wikiLink"),
-            shortName=object.get("shortName"),
-        )
-
-
-@dataclass
-class MedicalModel:
-    bsgID: str
-    name: str
-    description: str
-    useTime: int
-    resources: int
-    resourceRate: int
-    wikiLink: str
-
-    @classmethod
-    def fromJSONObj(cls, object: Any) -> MedicalModel:
-        return MedicalModel(
-            bsgID=object.get("bsgId"),
-            name=object.get("name"),
-            description=object.get("description"),
-            useTime=object.get("useTime"),
-            resources=object.get("resources"),
-            resourceRate=object.get("resourceRate"),
-            wikiLink=object.get("wikiLink"),
-        )
-
+"""
+Need to do following models:
+Ammo, Helmet, Maps, Medical Items, 1-2 more(?)
+"""
 
 @dataclass
 class TarkovMarketModel:
@@ -190,34 +112,5 @@ class TarkovMarketModel:
             updated=maya.parse(object.get("updated")).datetime(),
             slots=object.get("slots"),
             img=object.get("img"),
-            wikiLink=object.get("wikiLink"),
-        )
-
-
-@dataclass
-class WikiAmmoModel:
-    bsgID: str
-    name: str
-    description: str
-    damage: int
-    penetration: int
-    armorDamage: int
-    fragmentation: str
-    accuracy: str
-    recoil: str
-    wikiLink: str
-
-    @classmethod
-    def fromJSONObj(cls, object: Any) -> WikiAmmoModel:
-        return WikiAmmoModel(
-            bsgID=object.get("bsgId"),
-            name=object.get("name"),
-            description=object.get("description"),
-            damage=object.get("damage"),
-            penetration=object.get("penetration"),
-            armorDamage=object.get("armorDamage"),
-            fragmentation=object.get("fragChance"),
-            accuracy=object.get("accuracy"),
-            recoil=object.get("recoil"),
             wikiLink=object.get("wikiLink"),
         )

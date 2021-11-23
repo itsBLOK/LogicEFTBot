@@ -7,7 +7,7 @@ from bot.config import settings
 from bot.models import (
     KappaItemsModel,
     KappaQuestsModel,
-    LogicalArmorModel,
+    tcArmorModel,
     LogicalHelmetModel,
     LogicalMapsModel,
     MedicalModel,
@@ -31,7 +31,7 @@ class InvalidLocaleError(Exception):
 class EFT:
 
     @staticmethod
-    def check_armor(lang: str, query: str) -> LogicalArmorModel:
+    def check_armor(lang: str, query: str) -> tcArmorModel:
         armor_link = (
             settings["armor_link"][lang] if lang in settings["armor_link"] else None
         )
@@ -39,7 +39,7 @@ class EFT:
             raise InvalidLocaleError(lang)
         crafted_url = armor_link.format(quote(query), quote(lang))
         response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
-        return LogicalArmorModel.fromJSONObj(response)
+        return tcArmorModel.fromJSONObj(response)
 
     @staticmethod
     def check_astat(lang: str, query: str) -> WikiAmmoModel:
