@@ -1,17 +1,9 @@
 from __future__ import annotations  # type: ignore
-import requests
-import requests
-import requests.utils
-import requests.utils
-from requests.utils import quote  # type: ignore
-from requests.utils import quote  # type: ignore
-from typing import Optional
-from typing import Optional, Any
+from typing import Any
 from bot.config import settings
 from dataclasses import dataclass
 import datetime
 import maya
-import json
 
 
 def safe_int(value: Any, fallback: int) -> int:
@@ -46,6 +38,7 @@ class KappaQuestsModel:
             isReq=object.get("kappaReq"),
         )
 
+############
 
 @dataclass
 class tcArmorModel:
@@ -78,9 +71,107 @@ class tcArmorModel:
             tcLink=object.get("URL"),
         )
 
+@dataclass
+class tcHelmetModel:
+    name: str
+    bsgID: str
+    armorClass: str
+    armorMats: str
+    blindProtect: str
+    blocksEar: str
+    blocksEye: str
+    blocksFace: str
+    blocksHead: str
+    bluntThroughput: str
+    armorDurability: str
+    armorRepair: str
+    armorZones: str
+    armorSegments: str
+    armorMoveSpeed: str
+    armorTurnSpeed: str
+    armorErgo: str
+    cellHeight: str
+    cellWidth: str
+    itemWeight: str
+    maxStackSize: str
+
+
+    @classmethod
+    def fromJSONObj(cls, object: Any) -> tcHelmetModel:
+        return tcHelmetModel(
+            name=object.get("Name"),
+            bsgID=object.get("Item ID"),
+            armorClass=object.get("Armor Class"),
+            armorMats=object.get("Materials"),
+            blindProtect=object.get("Blindness Protection"),
+            blocksEar=object.get("Blocks Earpiece"),
+            blocksEye=object.get("Blocks Eyewear"),
+            blocksFace=object.get("Blocks FaceCover"),
+            blocksHead=object.get("Blocks Head"),
+            bluntThroughput=object.get("Blunt Throughput"),
+            armorDurability=object.get("Max Durability"),
+            armorRepair=object.get("Repair Cost"),
+            armorZones=object.get("Protection Zones"),
+            armorSegments=object.get("Armor Segments"),
+            armorMoveSpeed=object.get("Movement Speed Penalty"),
+            armorTurnSpeed=object.get("Turn Speed Penalty"),
+            armorErgo=object.get("Ergonomics Penalty"),
+            cellHeight=object.get("Cell Height"),
+            cellWidth=object.get("Cell Width"),
+            itemWeight=object.get("Item Weight"),
+            maxStackSize=object.get("Max Stack Size"),
+            
+        )
+
+@dataclass
+class tcAmmoModel:
+    name: str
+    bsgID: str
+    caliber: str
+    fleshDmg: str
+    penPower: str
+    armorDmg: str
+    ammoAcc: str
+    ammoRec: str
+    ammoFrag: str
+    bulletVelocity: str
+    misfire: str
+    penChance: str
+    heavyBleed: str
+    lightBleed: str
+    ballisticCoeff: str
+    cellHeight: str
+    cellWidth: str
+    itemWeight: str
+    maxStackSize: str
+
+    @classmethod
+    def fromJSONObj(cls, object: Any) -> tcHelmetModel:
+        return tcAmmoModel(
+            name=object.get("Name"),
+            bsgID=object.get("Item ID"),
+            caliber=object.get("Caliber"),
+            fleshDmg=object.get("Flesh Damage"),
+            penPower=object.get("Penetration Power"),
+            armorDmg=object.get("Armor Damage"),
+            ammoAcc=object.get("Accuracy"),
+            ammoRec=object.get("Recoil"),
+            ammoFrag=object.get("Frag Chance"),
+            bulletVelocity=object.get("Projectile Speed"),
+            misfire=object.get("Misfire Chance"),
+            penChance=object.get("Penetration Chance"),
+            heavyBleed=object.get("Heavy Bleeding Delta"),
+            lightBleed=object.get("Light Bleeeding Delta"),
+            ballisticCoeff=object.get("Ballistic Coefficient"),
+            cellHeight=object.get("Cell Height"),
+            cellWidth=object.get("Cell Width"),
+            itemWeight=object.get("Item Weight"),
+            maxStackSize=object.get("Max Stack Size"),
+        )
+
 """
 Need to do following models:
-Ammo, Helmet, Maps, Medical Items, 1-2 more(?)
+Maps, Medical Items
 """
 
 @dataclass
