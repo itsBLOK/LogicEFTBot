@@ -119,7 +119,7 @@ class EFT:
         if not price_link:
             raise InvalidLocaleError(lang)
         crafted_url = price_link.format(quote(query), quote(lang))
-        response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
+        response = requests.get(crafted_url).json()
         return TarkovMarketModel.fromJSONObj(response)
 
     @staticmethod
