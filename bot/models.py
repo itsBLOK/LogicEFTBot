@@ -68,7 +68,6 @@ class tcArmorModel:
             moveSpeedPen=object.get("Movement Speed Penalty"),
             turnSpeedPen=object.get("Turn Speed Penalty"),
             ergoPen=object.get("Ergonomics Penalty"),
-            tcLink=object.get("URL"),
         )
 
 @dataclass

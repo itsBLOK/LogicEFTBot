@@ -7,12 +7,10 @@ from bot.config import settings
 from bot.models import (
     KappaItemsModel,
     KappaQuestsModel,
+    tcAmmoModel,
     tcArmorModel,
-    LogicalHelmetModel,
-    LogicalMapsModel,
-    MedicalModel,
+    tcHelmetModel,
     TarkovMarketModel,
-    WikiAmmoModel,
 )
 from dataclasses import dataclass
 import datetime
@@ -42,7 +40,7 @@ class EFT:
         return tcArmorModel.fromJSONObj(response)
 
     @staticmethod
-    def check_astat(lang: str, query: str) -> WikiAmmoModel:
+    def check_astat(lang: str, query: str) -> tcAmmoModel:
         astat_link = (
             settings["astat_link"][lang] if lang in settings["astat_link"] else None
         )
@@ -50,10 +48,10 @@ class EFT:
             raise InvalidLocaleError(lang)
         crafted_url = astat_link.format(quote(query), quote(lang))
         response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
-        return WikiAmmoModel.fromJSONObj(response)
+        return tcAmmoModel.fromJSONObj(response)
 
     @staticmethod
-    def check_helmets(lang: str, query: str) -> LogicalHelmetModel:
+    def check_helmets(lang: str, query: str) -> tcHelmetModel:
         helmet_link = (
             settings["helmet_link"][lang] if lang in settings["helmet_link"] else None
         )
@@ -61,7 +59,7 @@ class EFT:
             raise InvalidLocaleError(lang)
         crafted_url = helmet_link.format(quote(query), quote(lang))
         response = requests.get(crafted_url, headers={"AUTH-TOKEN": os.environ['AUTH-TOKEN']}).json()
-        return LogicalHelmetModel.fromJSONObj(response)
+        return tcHelmetModel.fromJSONObj(response)
 
     @staticmethod
     def check_kappaquests(lang: str, query: str) -> KappaQuestsModel:

@@ -34,7 +34,6 @@ class DiscordEFTBot(LogicEFTBot):
             astat = EFT.check_astat(lang, data)
             embed = discord.Embed(
                 title=astat.name,
-                url=astat.wikiLink,
                 description=astat.description,
                 color=0x780A81,
             )
@@ -45,32 +44,32 @@ class DiscordEFTBot(LogicEFTBot):
             )
             embed.add_field(
                 name=localized_string(lang, "ammoFlesh"),
-                value=astat.damage,
+                value=astat.fleshDmg,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "ammoPen"),
-                value=astat.penetration,
+                value=astat.penPower,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "ammoArmor"),
-                value=astat.armorDamage,
+                value=astat.armorDmg,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "ammoAccuracy"),
-                value=astat.accuracy,
+                value=astat.ammoAcc,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "ammoRecoil"),
-                value=astat.recoil,
+                value=astat.ammoRec,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "ammoFrag"),
-                value=astat.fragmentation,
+                value=astat.ammoFrag,
                 inline=True,
             )
             return embed
@@ -94,8 +93,7 @@ class DiscordEFTBot(LogicEFTBot):
         try:
             armor = EFT.check_armor(lang, data)
             embed = discord.Embed(
-                title=armor.armorName,
-                url=armor.wikiLink,
+                title=armor.name,
                 description=localized_string(lang, "armorZones") + armor.armorZones,
                 color=0x780A81,
             )
@@ -111,32 +109,32 @@ class DiscordEFTBot(LogicEFTBot):
             )
             embed.add_field(
                 name=localized_string(lang, "armorMaterial"),
-                value=armor.armorMaterial,
+                value=armor.armorMats,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "armorDurability"),
-                value=armor.armorDurability,
+                value=armor.maxDurability,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "armorMoveSpeed"),
-                value=armor.armorMoveSpeed,
+                value=armor.moveSpeedPen,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "armorTurnSpeed"),
-                value=armor.armorTurnSpeed,
+                value=armor.turnSpeedPen,
                 inline=True,
             )
             embed.add_field(
                 name=localized_string(lang, "armorErgo"),
-                value=armor.armorErgo,
+                value=armor.ergoPen,
                 inline=True,
             )
             embed.set_footer(
                 text=localized_string(lang, "armorEffectiveDurability")
-                + armor.armorEffectiveDurability
+                + armor.effectiveDurability
                 + " - Data provided by Tarkov-Changes"
             )
             return embed
@@ -162,8 +160,6 @@ class DiscordEFTBot(LogicEFTBot):
             helmet = EFT.check_helmets(lang, data)
             embed = discord.Embed(
                 title=helmet.name,
-                url=helmet.wikiLink,
-                description=helmet.description,
                 color=0x780A81,
             )
             embed.set_thumbnail(
@@ -187,11 +183,6 @@ class DiscordEFTBot(LogicEFTBot):
                 inline=True,
             )
             embed.add_field(
-                name=localized_string(lang, "helmetRicochet"),
-                value=helmet.armorRico,
-                inline=True,
-            )
-            embed.add_field(
                 name=localized_string(lang, "helmetMoveSpeed"),
                 value=helmet.armorMoveSpeed,
                 inline=True,
@@ -207,13 +198,8 @@ class DiscordEFTBot(LogicEFTBot):
                 inline=True,
             )
             embed.add_field(
-                name=localized_string(lang, "helmetSoundReduc"),
-                value=helmet.helmetSoundReduc,
-                inline=True,
-            )
-            embed.add_field(
                 name=localized_string(lang, "helmetBlocksHeadset"),
-                value=helmet.helmetBlocksHeadset,
+                value=helmet.blocksEar,
                 inline=True,
             )
             return embed
@@ -238,7 +224,6 @@ class DiscordEFTBot(LogicEFTBot):
             medical = EFT.check_medical(lang, data)
             embed = discord.Embed(
                 title=medical.name,
-                url=medical.wikiLink,
                 description=medical.description,
                 color=0x780A81,
             )
@@ -276,7 +261,7 @@ class DiscordEFTBot(LogicEFTBot):
                 inline=True,
             )
             return embed
-
+    
     @command("maps")
     def bot_maps(self, ctx: CommandContext, data: str) -> Union[str, discord.Embed]:
         log.info("%s - searching for %s (new)\n", ctx.channel, data)
@@ -285,7 +270,6 @@ class DiscordEFTBot(LogicEFTBot):
             maps = EFT.check_maps(lang, data)
             embed = discord.Embed(
                 title=maps.name,
-                url=maps.wikiLink,
                 description=maps.features,
                 color=0x780A81,
             )
