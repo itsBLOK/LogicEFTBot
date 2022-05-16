@@ -34,7 +34,6 @@ class DiscordEFTBot(LogicEFTBot):
             astat = EFT.check_astat(lang, data)
             embed = discord.Embed(
                 title=astat.name,
-                description=astat.description,
                 color=0x780A81,
             )
             embed.set_thumbnail(
@@ -212,95 +211,6 @@ class DiscordEFTBot(LogicEFTBot):
             embed.add_field(
                 name="Invalid Item Search",
                 value="You've entered in an invalid helmet item ; please try again.",
-                inline=True,
-            )
-            return embed
-
-    @command("medical", "meds")
-    def bot_medical(self, ctx: CommandContext, data: str) -> Union[str, discord.Embed]:
-        log.info("%s - searching for %s (new)\n", ctx.channel, data)
-        lang = self.db.get_lang(ctx.channel)
-        try:
-            medical = EFT.check_medical(lang, data)
-            embed = discord.Embed(
-                title=medical.name,
-                description=medical.description,
-                color=0x780A81,
-            )
-            embed.set_thumbnail(
-                url="https://storage.tarkov-database.com/assets/icons/1-1/{0}.png".format(
-                    medical.bsgID
-                )
-            )
-            embed.add_field(
-                name=localized_string(lang, "medUseTime"),
-                value=medical.useTime,
-                inline=True,
-            )
-            embed.add_field(
-                name=localized_string(lang, "maxItemHP"),
-                value=medical.resources,
-                inline=True,
-            )
-            embed.add_field(
-                name=localized_string(lang, "maxHealPerUse"),
-                value=medical.resourceRate,
-                inline=True,
-            )
-
-            return embed
-        except:
-            embed = discord.Embed(
-                title="LogicEFTBot - Error",
-                color=0x780A81,
-            )
-            embed.set_thumbnail(url="https://illogical.network/api/error.png")
-            embed.add_field(
-                name="Invalid Item Search",
-                value="You've entered in an invalid medical item ; please try again.",
-                inline=True,
-            )
-            return embed
-    
-    @command("maps")
-    def bot_maps(self, ctx: CommandContext, data: str) -> Union[str, discord.Embed]:
-        log.info("%s - searching for %s (new)\n", ctx.channel, data)
-        lang = self.db.get_lang(ctx.channel)
-        try:
-            maps = EFT.check_maps(lang, data)
-            embed = discord.Embed(
-                title=maps.name,
-                description=maps.features,
-                color=0x780A81,
-            )
-            embed.set_thumbnail(
-                url="https://eft.bot/images/wiki/{0}.png".format(maps.shortName)
-            )
-            embed.add_field(
-                name=localized_string(lang, "mapPlayers"),
-                value=maps.players,
-                inline=True,
-            )
-            embed.add_field(
-                name=localized_string(lang, "mapDuration"),
-                value=maps.duration,
-                inline=True,
-            )
-            embed.add_field(
-                name=localized_string(lang, "mapEnemies"),
-                value=maps.enemies,
-                inline=True,
-            )
-            return embed
-        except:
-            embed = discord.Embed(
-                title="LogicEFTBot - Error",
-                color=0x780A81,
-            )
-            embed.set_thumbnail(url="https://illogical.network/api/error.png")
-            embed.add_field(
-                name="Invalid Item Search",
-                value="You've entered in an invalid map name ; please try again.",
                 inline=True,
             )
             return embed
